@@ -46,9 +46,11 @@ new_pdfs <- as.tibble(d$value[pdflist %!in% blotters$name])
 new_pdfs_name <- d$name[pdflist %!in% blotters$name]
 new_pdfs_name
 
+download.file(d[i,1] %>% as.character, destfile = paste0(d[i,2], ".pdf"))
+
 ##placing new PDFs in Google Drive
-for (i in 1:length(new_pdfs)) {
-  drive_upload(new_pdfs[i], path = "Parole Data/Docket and Results PDF's/", name = new_pdfs_names[i], overwrite = TRUE, type = "pdf")
+for (i in 1:nrow(new_pdfs)) {
+  drive_upload(new_pdfs[i,1] %>% as.character, path = "Parole Data/Docket and Results PDF's/", name = new_pdfs_names[i], overwrite = TRUE, type = "pdf")
 }
 
 ##### Loop through list of PDFs: read, separate pages of each PDF, and join them into a blank dataframe ('blot'), 
