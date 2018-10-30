@@ -1,5 +1,13 @@
 library(rvest)
-library(tidyverse)
+library(tidyr)
+library(selectr)
+library(tibble)
+library(stringr)
+library(dplyr)
+library(googledrive)
+library(rvest)
+library(XML)
+library(RCurl)
 
 #### Create one folder with two subfolders: one for the pdfs, one for the cleaned data
 
@@ -11,30 +19,12 @@ library(tidyverse)
 pdfs <- read_html("https://www.ok.gov/ppb/Dockets_and_Results/index.html") %>%
   html_nodes("a") %>%
   html_attr("href") %>%
-  as.tibble %>%
-  filter(str_detect(value, "Parole Docket")) %>%
-  mutate(link = paste0("https://www.ok.gov/", value) %>%
-           str_replace_all(" ", "%20"))
 
-#### 2. Identify the new dockets 
-#### 3. Download the new pdfs 
-#### 4. Clean the pdf
-#### 5. Export the new data into a .csv in the cleaned folder
+download.file(d[i,1] %>% as.character, destfile = paste0(d[i,2], ".pdf"))
 
-
-           
-
-
-# Oklahoma County jail data example ---------------------------------------
-##### Get a list of all filenames of blotter PDFs
-pdflist <- drive_ls("Jail blotters")
-pdflist <- pdflist$name
-blotters <- list.files("OKCO Blotters")
-
-new_pdfs <- pdflist[!pdflist %in% blotters]
-
-for (i in 1:length(new_pdfs)) {
-  drive_download(new_pdfs[i], path = paste0("OKCO Blotters/", new_pdfs[i]), overwrite = TRUE)
+##placing new PDFs in Google Drive
+for (i in 1:nrow(new_pdfs)) {
+  drive_upload(new_pdfs[i,1] %>% as.character, path = "Parole Data/Docket and Results PDF's/", name = new_pdfs_names[i], overwrite = TRUE, type = "pdf")
 }
 
 ##### Loop through list of PDFs: read, separate pages of each PDF, and join them into a blank dataframe ('blot'), 
