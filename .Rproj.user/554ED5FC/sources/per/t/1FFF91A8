@@ -5,14 +5,14 @@
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "4115824904",
+    "hash" : "2183819450",
     "id" : "1FFF91A8",
-    "lastKnownWriteTime" : 1540840474,
-    "last_content_update" : 1540840474611,
+    "lastKnownWriteTime" : 1540844235,
+    "last_content_update" : 1540844235328,
     "path" : "~/Documents/GitHub/okla-parole/clean loop.R",
     "project_path" : "clean loop.R",
     "properties" : {
-        "cursorPosition" : "18,0",
+        "cursorPosition" : "16,33",
         "scrollLine" : "2"
     },
     "relative_order" : 2,

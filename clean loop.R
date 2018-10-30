@@ -3,8 +3,6 @@ library(tidyverse)
 
 #### Create one folder with two subfolders: one for the pdfs, one for the cleaned data
 
-#### Connect to Google drive folder through R using library(googledrive)
-
 #### Write an R script that will:
 #### 1. Identify all of the Docket pdfs on https://www.ok.gov/ppb/Dockets_and_Results/index.html
 
